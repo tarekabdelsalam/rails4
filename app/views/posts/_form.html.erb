@@ -1,38 +1,29 @@
-<%= form_for @post, :html => { :class => "form-horizontal post" } do |f| %>
+<%= form_for(@post) do |f| %>
+  <% if @post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
 
-    <% if @post.errors.any? %>
-    <div id="error_expl" class="panel panel-danger">
-      <div class="panel-heading">
-        <h3 class="panel-title"><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h3>
-      </div>
-      <div class="panel-body">
-        <ul>
-        <% @post.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-        </ul>
-      </div>
+      <ul>
+      <% @post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
     </div>
   <% end %>
 
-  <div class="control-group">
-    <%= f.label :Title, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :Title, :class => 'form-control' %>
-    </div>
-    <%= error_span(@post[:Title]) %>
+  <div class="field">
+    <%= f.label :Title %><br>
+    <%= f.text_field :Title %>
   </div>
-  <div class="control-group">
-    <%= f.label :Body, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :Body, :class => 'form-control' %>
-    </div>
-    <%= error_span(@post[:Body]) %>
+  <div class="field">
+    <%= f.label :Body %><br>
+    <%= f.text_field :Body %>
   </div>
-
-
-  <%= f.submit nil, :class => 'btn btn-primary' %>
-  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-            posts_path, :class => 'btn btn-default' %>
-
+  <div class="field">
+    <%= f.label :Created_at %><br>
+    <%= f.text_field :Created_at %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
 <% end %>
